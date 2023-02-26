@@ -92,11 +92,11 @@ def unseenmail(request):
                             pass
                         if content_type == "text/plain" and "attachment" not in content_disposition:
                             bodypath = os.path.join(folder_name, 'body.txt')
-                            open(bodypath, "w").write(body)
+                            open(bodypath, "w+", encoding="utf-8").write(body)
                             text_body = 'media/' + folder + "/" + "body.txt"
                         elif content_type == "text/html" and "attachment" not in content_disposition:
                             bodypath = os.path.join(folder_name, 'body.html')
-                            open(bodypath, "w").write(body)
+                            open(bodypath, "w+", encoding="utf-8", errors="ignore").write(body)
                             html_body = 'media/' + folder + "/" + "body.html"
                         elif "attachment" in content_disposition:
                             # download attachment
@@ -114,13 +114,13 @@ def unseenmail(request):
                     if content_type == "text/plain":
                         # print only text email parts
                         bodypath = os.path.join(folder_name, 'body.txt')
-                        open(bodypath, "w").write(body)
+                        open(bodypath, "w+", encoding="utf-8").write(body)
                         text_body = 'media/' + folder + "/" + "body.txt"
                     elif content_type == "text/html":
                         filename = "body.html"
                         bodypath = os.path.join(folder_name, filename)
                         # write the file
-                        open(bodypath, "w").write(body)
+                        open(bodypath, "w+", encoding="UTF-8", errors="ignore").write(body)
                         html_body = 'media/' + folder + "/" + "body.html"
                         # open in the default browser
                         # webbrowser.open(filepath)
